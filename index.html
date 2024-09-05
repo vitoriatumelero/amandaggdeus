@@ -7,15 +7,25 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #FFD700;
+            color: white;
+            overflow: hidden; /* Impede a rolagem da página */
+        }
+
+        .container, .amanda {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin: 0;
-            text-align: center;
-            background-color: #FFD700;
-            color: white;
+            width: 100vw;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         .container {
@@ -25,6 +35,7 @@
             box-shadow: 0 0 10px #999;
             border-radius: 10px;
             text-align: center;
+            z-index: 1;
         }
 
         h1 {
@@ -41,11 +52,12 @@
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 1em;
             margin-top: 20px;
             cursor: pointer;
             border-radius: 5px;
             box-shadow: 0 5px #666;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .button:hover {
@@ -69,16 +81,9 @@
             text-align: center;
             margin-top: 20px;
             animation: fadeIn 1s;
-            position: relative;
-            width: 100%;
-            height: 100vh;
+            background-color: transparent;
+            z-index: 0;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: transparent; 
-            text-decoration-color: #3e8e41;
         }
 
         .amanda::before {
@@ -88,7 +93,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('images/amandagg1.jpg');
+            background-image: url('images/amandagg1.jpg'), 
+                              url('images/amandagg2.jpg'),
+                              url('images/amandagg3.jpg'),
+                              url('images/amandagg4.jpg');
             background-size: 15%;
             background-repeat: repeat;
             opacity: 0.9;
@@ -109,24 +117,35 @@
             height: auto;
             border-radius: 50%;
             margin-top: 20px;
-            z-index: 1; /* Garantir que a imagem esteja acima do fundo */
+            z-index: 1;
         }
 
         h2 {
             margin-top: 20px;
-            z-index: 1; /* Garantir que o texto esteja acima do fundo */
+            z-index: 1;
         }
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="main-container">
         <h1>Você acredita em Deus?</h1>
-        <img src="images/jesus.jpg" alt="Christian Symbol" />
+        <img src="images/jesus.jpg" alt="Christian Symbol" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 0 5px #666;">
         <button class="button" onclick="showAmanda()">Sim</button>
     </div>
 
@@ -137,8 +156,12 @@
 
     <script>
         function showAmanda() {
-            document.querySelector('.container').classList.add('hidden');
+            document.getElementById('main-container').classList.add('hidden');
             document.getElementById('amanda').classList.remove('hidden');
+        }
+
+        function showLeonardo() {
+            // Adicione lógica para mostrar uma página de Leonardo se necessário
         }
     </script>
 </body>
